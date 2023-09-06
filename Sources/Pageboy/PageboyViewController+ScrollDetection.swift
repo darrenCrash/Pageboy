@@ -81,7 +81,7 @@ extension PageboyViewController: UIPageViewControllerDelegate {
 // MARK: - UIScrollViewDelegate
 extension PageboyViewController: UIScrollViewDelegate {
     
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let currentIndex = currentIndex, scrollViewIsActual(scrollView) else {
             return
         }
