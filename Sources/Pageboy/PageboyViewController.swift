@@ -134,6 +134,14 @@ open class PageboyViewController: UIViewController {
             pageViewController?.scrollView?.isScrollEnabled = isScrollEnabled
         }
     }
+    /// Whether scrolling is disabled in a particular direction.
+    ///
+    /// Default is FALSE.
+    open var isDirectionalLockEnabled: Bool = false {
+        didSet {
+            pageViewController?.scrollView?.isDirectionalLockEnabled = isDirectionalLockEnabled
+        }
+    }
     /// Whether the page view controller should infinitely scroll at the end of page ranges.
     ///
     /// Default is FALSE.
@@ -308,8 +316,12 @@ open class PageboyViewController: UIViewController {
     /// - Parameters:
     ///   - index: The index to delete the page from.
     ///   - updateBehavior: Behavior to execute after the page was deleted.
-    open func deletePage(at index: PageIndex,
-                         then updateBehavior: PageUpdateBehavior = .doNothing) {
+    ///   - completion: Closure to execute on completion.
+    open func deletePage(
+        at index: PageIndex,
+        then updateBehavior: PageUpdateBehavior = .doNothing,
+        completion: (() -> Void)? = nil
+    ) {
         verifyNewPageCount(then: { (oldPageCount, newPageCount) in
             assert(index < oldPageCount,
                    "Attempting to delete page at \(index) but there were only \(oldPageCount) pages before the update")
@@ -341,6 +353,7 @@ open class PageboyViewController: UIViewController {
                             }},
                            completion: { (_) in
                             self.view.isUserInteractionEnabled = true
+                            completion?()
             })
         })
     }
