@@ -13,7 +13,7 @@ extension PageboyViewController: UIPageViewControllerDelegate {
     
     // MARK: UIPageViewControllerDelegate
     
-    public func pageViewController(_ pageViewController: UIPageViewController,
+    open func pageViewController(_ pageViewController: UIPageViewController,
                                    willTransitionTo pendingViewControllers: [UIViewController]) {
         guard pageViewControllerIsActual(pageViewController) else {
             return
